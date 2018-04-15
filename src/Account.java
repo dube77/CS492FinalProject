@@ -1,7 +1,7 @@
 public class Account {
-    private String website;
-    private String username;
-    private String password;
+    public String website;
+    public String username;
+    public String password;
 
     public Account(String website, String username, String password){
         this.website = website;
