@@ -33,8 +33,8 @@ public class PasswordManager {
         }
     }
 
-    private void StoreArrayToFile(){
-
+    private ArrayList<String> DeconstructAccounts(ArrayList<Account> accounts){
+        return null;
     }
 
     /**
