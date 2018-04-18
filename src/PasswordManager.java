@@ -39,6 +39,7 @@ public class PasswordManager {
         	System.err.println("An FileNotFoundException was caught : " + e.getMessage());
 		}
 
+        //Print out accounts
         for (Account a : accounts){
             System.out.println(a.toString());
         }
