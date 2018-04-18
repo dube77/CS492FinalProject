@@ -24,7 +24,7 @@ public class PasswordManager {
         //Encrypt data
         encryptedLines.clear();
         for (Account a : accounts){
-            encryptedLines.add(a.toString());
+            encryptedLines.add(crypt.encrypt(key, initVector, a.toString()));
         }
 
         //Write data
