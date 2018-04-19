@@ -20,8 +20,8 @@ public class FileManager {
             return lines;
         } catch (IOException e) {
             System.err.println("An IOException was caught : " + e.getMessage());
-            return null;
         }
+        return null;
     }
 
     /**

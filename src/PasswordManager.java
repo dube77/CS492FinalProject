@@ -6,6 +6,13 @@ public class PasswordManager {
         PasswordManager pm = new PasswordManager();
         Encryption crypt = new Encryption();
         FileManager fm = new FileManager();
+        Hashing h = new Hashing();
+
+        //Testing Hashing
+        String password = "password";
+        System.out.println(password);
+        System.out.println(h.hash(password));
+
 
         //Read data
         ArrayList<String> encryptedLines = fm.Read("encrypted.txt");
