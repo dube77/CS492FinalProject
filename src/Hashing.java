@@ -13,7 +13,7 @@ public class Hashing {
     public String hash(String s){
         try {
             s += salt;
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            MessageDigest digest = MessageDigest.getInstance("MD5"); //"SHA-256" - Alternative hashing function
             byte[] encodedHash = digest.digest(s.getBytes(StandardCharsets.UTF_8));
             return toHex(encodedHash);
         } catch (NoSuchAlgorithmException e) {

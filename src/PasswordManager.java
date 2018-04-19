@@ -1,4 +1,6 @@
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class PasswordManager {
 
@@ -7,35 +9,52 @@ public class PasswordManager {
         Encryption crypt = new Encryption();
         FileManager fm = new FileManager();
         Hashing h = new Hashing();
-
-        //Testing Hashing
-        String password = "password";
-        System.out.println(password);
-        System.out.println(h.hash(password));
-
-
-        //Read data
-        ArrayList<String> encryptedLines = fm.Read("encrypted.txt");
-
-        //Decrypt data
         String key = "Bar12345Bar12345"; // 128 bit key
         String initVector = "RandomInitVector"; // 16 bytes IV
-        ArrayList<String> decryptedLines = new ArrayList<>();
-        for (String encryptedLine : encryptedLines) {
-            decryptedLines.add(crypt.decrypt(key, initVector, encryptedLine));
-        }
-        
-        //Turn ArrayList of strings into ArrayList of account objects
-        ArrayList<Account> accounts = pm.SetupAccounts(decryptedLines);
-        
-        //Encrypt data
-        encryptedLines.clear();
-        for (Account a : accounts){
-            encryptedLines.add(crypt.encrypt(key, initVector, a.toString()));
+
+        //Mock Login
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Please enter your username: ");
+        String username = sc.nextLine();
+        System.out.print("Please enter your password: ");
+        String password = sc.nextLine();
+
+        String passHash = h.hash(username + password); //File name is hash of username + password
+        ArrayList<String> inputLines = new ArrayList<>();
+        if (fm.isFile(passHash, new File("data/"))){
+            inputLines = fm.Read("data/" + passHash);
+        } else {
+            System.out.println(passHash + " Invalid Login Credentials");
         }
 
-        //Write data
-        fm.Write(encryptedLines, "new_encrypted.txt");
+//        //Testing Hashing
+//        String password = "password";
+//        System.out.println(password);
+//        System.out.println(h.hash(password));
+//
+//
+//        //Read data
+//        ArrayList<String> encryptedLines = fm.Read("encrypted.txt");
+//
+//        //Decrypt data
+//        String key = "Bar12345Bar12345"; // 128 bit key
+//        String initVector = "RandomInitVector"; // 16 bytes IV
+//        ArrayList<String> decryptedLines = new ArrayList<>();
+//        for (String encryptedLine : encryptedLines) {
+//            decryptedLines.add(crypt.decrypt(key, initVector, encryptedLine));
+//        }
+//
+//        //Turn ArrayList of strings into ArrayList of account objects
+//        ArrayList<Account> accounts = pm.SetupAccounts(decryptedLines);
+//
+//        //Encrypt data
+//        encryptedLines.clear();
+//        for (Account a : accounts){
+//            encryptedLines.add(crypt.encrypt(key, initVector, a.toString()));
+//        }
+//
+//        //Write data
+//        fm.Write(encryptedLines, "new_encrypted.txt");
     }
 
     /**
