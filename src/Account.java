@@ -13,6 +13,7 @@ public class Account {
         this.website = website;
         this.username = username;
         this.password = password;
+        //Change website to account name (or nickname), Add website url and notes
     }
 
     @Override

@@ -65,8 +65,8 @@ public class PasswordManager {
     private ArrayList<Account> SetupAccounts(ArrayList<String> accountLines){
         ArrayList<Account> accounts = new ArrayList<>();
         for (String accountLine : accountLines) {
-            String[] data = accountLine.split(",");
-            accounts.add(new Account(data[0], data[1], data[2]));
+            String[] data = accountLine.split(",");//Change to |
+            accounts.add(new Account(data[0], data[1], data[2]));//Update to new account model
         }
         return accounts;
     }
