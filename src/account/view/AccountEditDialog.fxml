@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="account.view.AccountEditDialogController">
+   <children>
+      <GridPane layoutX="14.0" layoutY="14.0" prefHeight="226.0" prefWidth="273.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="131.0" minWidth="10.0" prefWidth="94.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.0" minWidth="10.0" prefWidth="178.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints fillHeight="false" minHeight="10.0" percentHeight="12.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints fillHeight="false" minHeight="10.0" percentHeight="12.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints fillHeight="false" minHeight="10.0" percentHeight="12.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints fillHeight="false" minHeight="10.0" percentHeight="12.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Website Name" GridPane.halignment="RIGHT">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Username" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Password" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Website URL" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Notes" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets right="10.0" top="15.0" />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="websiteNameField" GridPane.columnIndex="1" />
+            <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="websiteUrlField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextArea fx:id="notesField" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets top="10.0" />
+               </GridPane.margin>
+            </TextArea>
+         </children>
+      </GridPane>
+      <ButtonBar layoutX="86.0" layoutY="361.0" prefHeight="25.0" prefWidth="200.0">
+        <buttons>
+          <Button mnemonicParsing="false" onAction="#handleOk" text="OK" />
+            <Button mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
+        </buttons>
+      </ButtonBar>
+   </children>
+</AnchorPane>

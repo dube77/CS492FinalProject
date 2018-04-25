@@ -3,6 +3,7 @@ package account;
 import java.io.IOException;
 
 import account.model.Account;
+import account.view.AccountEditDialogController;
 import account.view.AccountOverviewController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -11,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
@@ -70,6 +72,32 @@ public class MainApp extends Application {
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    
+    public boolean showAccountEditDialog(Account account) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/AccountEditDialog.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Account");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            AccountEditDialogController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setAccount(account);
+
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
