@@ -86,6 +86,6 @@ public class Account {
     
     @Override
     public String toString() {
-        return this.websiteName + "|" + this.username + "|" + this.password + "|" + this.websiteUrl + "|" + this.notes;
+        return this.websiteName.getValue() + "|" + this.username.getValue() + "|" + this.password.getValue() + "|" + this.websiteUrl.getValue() + "|" + this.notes.getValue();
     }
 }
