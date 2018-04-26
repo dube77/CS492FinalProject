@@ -1,3 +1,0 @@
-facebook,user,pass
-twitter,user,pass
-reddit,user,pass

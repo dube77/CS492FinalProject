@@ -24,7 +24,7 @@ public class MainApp extends Application {
     private Encryption crypt = new Encryption();
     private FileManager fm = new FileManager();
     private Hashing h = new Hashing();
-    private String key = "Bar12345Bar12345"; // 128 bit key
+    private String key; // 128 bit key
     private String initVector = "RandomInitVector"; // 16 bytes IV
     private String username;
     private String password;
@@ -32,10 +32,6 @@ public class MainApp extends Application {
     private ObservableList<Account> accountData = FXCollections.observableArrayList();
 
     public MainApp() {
-        // Add some sample data
-//        accountData.add(new Account("Reddit", "User", "Pass", "http://www.reddit.com", ""));
-//        accountData.add(new Account("Facebook", "User", "Pass", "http://www.facebook.com", ""));
-//        accountData.add(new Account("Twitter", "User", "Pass", "http://www.twitter.com", ""));
     }
 
     public ObservableList<Account> getAccountData() {
@@ -132,13 +128,27 @@ public class MainApp extends Application {
             this.password = controller.getPassword();
             
             if (controller.isLoggedIn()) {
+            	//Read data from file
             	ArrayList<String> inputLines = new ArrayList<>();
             	String passHash = h.hash(this.username + this.password);
             	inputLines = fm.Read("data/" + passHash);
             	
-            	//XOR THE KEY AND PASSHASH FOR ENCRYPTION
+            	//Compute decryption key from password and username
+            	this.key = (h.hash(this.password + this.username)).substring(0, 16);
+            	ArrayList<String> decryptedLines = new ArrayList<>();
+            	for (String inputLine : inputLines) {
+            		decryptedLines.add(crypt.decrypt(this.key, initVector, inputLine));
+            	}
+            	
+            	//Setup accounts with decrypted lines
+            	for (String decryptedLine : decryptedLines) {
+            		String[] data = decryptedLine.split("`");
+            		accountData.add(new Account(data[0], data[1], data[2], data[3], data[4]));
+            	}
+            	
             	return true;
             } else if (controller.isRegistering()) {
+            	this.key = (h.hash(this.password + this.username)).substring(0, 16);
             	return true;
             }
             return false;
@@ -169,7 +179,7 @@ public class MainApp extends Application {
     	//Save file before the program closes
     	ArrayList<String> encryptedLines = new ArrayList<>();
     	for (Account a : accountData) {
-    		encryptedLines.add(crypt.encrypt(key, initVector, a.toString()));
+    		encryptedLines.add(crypt.encrypt(this.key, initVector, a.toString()));
     	}
     	fm.Write(encryptedLines, "data/" + h.hash(this.username + this.password));
     }
